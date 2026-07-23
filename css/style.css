@@ -313,7 +313,7 @@ button { font-family: inherit; cursor: pointer; }
 .node-detail-body { display: flex; gap: 26px; align-items: flex-start; }
 .node-detail-body .nd-text { flex: 1; min-width: 0; }
 .nd-photo {
-  width: 120px; height: 120px; object-fit: cover; border-radius: var(--radius-md);
+  width: 240px; height: 240px; object-fit: cover; border-radius: var(--radius-md);
   border: 1px solid var(--line-strong); flex-shrink: 0; box-shadow: var(--shadow);
 }
 .node-detail-close {
@@ -447,7 +447,7 @@ button { font-family: inherit; cursor: pointer; }
   .competency-panels { grid-template-columns: 1fr; }
   .leadership-split { grid-template-columns: 1fr; gap: 40px; }
   .node-detail-body { flex-direction: column; }
-  .nd-photo { width: 88px; height: 88px; }
+  .nd-photo { width: 176px; height: 176px; }
 }
 
 @media (max-width: 540px) {
