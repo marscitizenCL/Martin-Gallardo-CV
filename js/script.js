@@ -56,15 +56,27 @@ function buildDiagram() {
 
   let out = "";
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   // connecting segments
   nodes.forEach((n, i) => {
     if (i === 0) return;
     const x1 = margin + spacing * (i - 1);
     const x2 = margin + spacing * i;
     const isLastSegment = i === nodes.length - 1;
-    out += `<line class="diag-line-progress" x1="${x1}" y1="${midY}" x2="${x2}" y2="${midY}" ${
+    const pathId = `seg-path-${i}`;
+    out += `<path id="${pathId}" class="diag-line-progress" d="M${x1},${midY} L${x2},${midY}" ${
       isLastSegment ? 'stroke-dasharray="5 7"' : ""
     } />`;
+
+    if (!reduceMotion) {
+      const delay = (i - 1) * 0.4;
+      out += `<circle class="diag-packet" r="2.6">
+        <animateMotion dur="2.4s" begin="${delay}s" repeatCount="indefinite">
+          <mpath href="#${pathId}"/>
+        </animateMotion>
+      </circle>`;
+    }
   });
 
   // nodes + labels
@@ -290,7 +302,7 @@ function renderContact() {
 }
 
 /* ============================================================
-   THEME TOGGLE (Blueprint / HMI)
+   THEME TOGGLE (Night / Day)
    ============================================================ */
 function initTheme() {
   const btn = document.getElementById("theme-toggle");
@@ -299,17 +311,48 @@ function initTheme() {
   updateToggleState();
 
   btn.addEventListener("click", () => {
-    const current = document.body.getAttribute("data-theme") || "blueprint";
-    const next = current === "blueprint" ? "hmi" : "blueprint";
+    const current = document.body.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
     document.body.setAttribute("data-theme", next);
     localStorage.setItem("mg-theme", next);
     updateToggleState();
   });
 
   function updateToggleState() {
-    const theme = document.body.getAttribute("data-theme") || "blueprint";
-    btn.setAttribute("aria-pressed", theme === "hmi" ? "true" : "false");
+    const theme = document.body.getAttribute("data-theme") || "dark";
+    btn.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
   }
+}
+
+/* ============================================================
+   LIVE CLOCK — Santiago time, reinforces the "live system" feel
+   ============================================================ */
+function initLiveClock() {
+  const el = document.getElementById("live-clock");
+  if (!el) return;
+  const fmt = new Intl.DateTimeFormat("es-CL", {
+    timeZone: "America/Santiago",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  const tick = () => {
+    el.textContent = `SANTIAGO ${fmt.format(new Date())}`;
+  };
+  tick();
+  setInterval(tick, 1000);
+}
+
+/* ============================================================
+   REGION BADGES
+   ============================================================ */
+function renderRegions() {
+  const wrap = document.getElementById("region-badges");
+  if (!wrap) return;
+  wrap.innerHTML = REGIONS.map(
+    (r) => `<span class="region-badge"><span class="dot" aria-hidden="true"></span>${escapeXML(r)}</span>`
+  ).join("");
 }
 
 /* ============================================================
@@ -368,6 +411,7 @@ function initReveal() {
    ============================================================ */
 document.getElementById("footer-year").textContent = new Date().getFullYear();
 renderHero();
+renderRegions();
 buildDiagram();
 renderCompetencies();
 renderEducation();
@@ -377,3 +421,4 @@ renderContact();
 initTheme();
 initMobileNav();
 initReveal();
+initLiveClock();

@@ -12,9 +12,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-theme="blueprint">
+<body data-theme="dark">
 
 <div class="grid-overlay" aria-hidden="true"></div>
+<div class="ambient-glow" aria-hidden="true"></div>
+
+<div class="status-bar">
+  <span class="status-dot" aria-hidden="true"></span>
+  <strong>SISTEMA EN LÍNEA</strong>
+  <span class="status-sep">·</span>
+  <span id="live-clock"></span>
+  <span class="status-sep">·</span>
+  <span>UPTIME 15+ AÑOS</span>
+</div>
 
 <header class="topbar">
   <a class="brand" href="#hero" aria-label="Inicio">
@@ -30,12 +40,9 @@
     <a href="#contacto">Contacto</a>
   </nav>
 
-  <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
-    <span class="theme-toggle-track">
-      <span class="theme-toggle-label left">Blueprint</span>
-      <span class="theme-toggle-label right">HMI</span>
-      <span class="theme-toggle-knob" aria-hidden="true"></span>
-    </span>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg>
   </button>
 
   <button id="nav-burger" class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
@@ -53,6 +60,7 @@
         <h1 id="hero-name">MARTÍN GALLARDO</h1>
         <p class="role-line" id="hero-role"></p>
         <p class="summary" id="hero-summary"></p>
+        <div class="region-badges" id="region-badges"></div>
         <div class="cta-row">
           <a href="#trayectoria" class="btn btn-primary">Ver trayectoria</a>
           <a href="#contacto" class="btn btn-ghost">Contactar</a>
@@ -60,9 +68,15 @@
       </div>
 
       <div class="nameplate-wrap" aria-hidden="true">
-        <div class="nameplate">
-          <span class="nameplate-initials">MG</span>
-          <span class="nameplate-serial">SN · LATAM-2026</span>
+        <div class="id-badge">
+          <div class="id-badge-photo">
+            <img src="assets/martin-photo.jpg" alt="Martín Gallardo" width="220" height="220">
+            <span class="id-badge-status"></span>
+          </div>
+          <div class="id-badge-label">
+            <span class="id-badge-name">MARTÍN GALLARDO</span>
+            <span class="id-badge-serial">SN · LATAM-2026</span>
+          </div>
         </div>
       </div>
     </div>

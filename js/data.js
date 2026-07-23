@@ -24,6 +24,8 @@ const PROFILE = {
   ],
 };
 
+const REGIONS = ["Chile", "Argentina", "Perú", "Sudamérica", "EE. UU. / Europa — reporte directo"];
+
 /* Orden cronológico ascendente — el nodo más reciente queda "energizado". */
 const CAREER = [
   {
