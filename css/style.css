@@ -277,7 +277,6 @@ button { font-family: inherit; cursor: pointer; }
 .diagram-scroll { overflow-x: auto; padding-bottom: 8px; margin: 0 calc(var(--edge) * -1); padding-left: var(--edge); padding-right: var(--edge); }
 #line-diagram { display: block; height: 260px; }
 .scroll-hint { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint); text-align: center; margin-top: 6px; }
-@media (min-width: 861px) { .scroll-hint { display: none; } }
 
 .diag-line { fill: none; stroke: var(--line-strong); stroke-width: 2; }
 .diag-line-progress { fill: none; stroke: var(--accent-teal); stroke-width: 2; filter: drop-shadow(0 0 3px var(--glow-teal)); }
@@ -292,9 +291,15 @@ button { font-family: inherit; cursor: pointer; }
   0% { opacity: 0.65; stroke-width: 2; }
   100% { opacity: 0; stroke-width: 14; }
 }
-.diag-node-group { cursor: pointer; }
+.diag-node-group {
+  cursor: pointer; transition: transform 180ms var(--ease);
+  transform-box: fill-box; transform-origin: center;
+}
+.diag-node-group:hover, .diag-node-group:focus-visible { transform: scale(1.22); }
 .diag-hit { pointer-events: all; }
-.diag-node-group:hover .diag-node-ring { stroke: var(--accent-teal); }
+.diag-node-group:hover .diag-node-ring, .diag-node-group:focus-visible .diag-node-ring {
+  stroke: var(--accent-teal); filter: drop-shadow(0 0 8px var(--glow-teal));
+}
 .diag-label-company { font-family: var(--font-display); font-size: 13.5px; font-weight: 600; fill: var(--ink); }
 .diag-label-role { font-family: var(--font-body); font-size: 11px; fill: var(--ink-muted); }
 .diag-label-period { font-family: var(--font-mono); font-size: 10.5px; fill: var(--ink-faint); }
@@ -304,6 +309,12 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: 20px; background: var(--bg-panel); border: 1px solid var(--line);
   border-radius: var(--radius-md); padding: 28px 32px; position: relative;
   box-shadow: var(--shadow);
+}
+.node-detail-body { display: flex; gap: 26px; align-items: flex-start; }
+.node-detail-body .nd-text { flex: 1; min-width: 0; }
+.nd-photo {
+  width: 120px; height: 120px; object-fit: cover; border-radius: var(--radius-md);
+  border: 1px solid var(--line-strong); flex-shrink: 0; box-shadow: var(--shadow);
 }
 .node-detail-close {
   position: absolute; top: 14px; right: 16px; background: none; border: none;
@@ -351,8 +362,11 @@ button { font-family: inherit; cursor: pointer; }
 /* ============================================================
    LIDERAZGO — gauges & strengths
    ============================================================ */
-.gauges-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-bottom: 56px; }
-.gauge-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 18px 10px; }
+.leadership-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-bottom: 40px; }
+.leadership-col .subsection-title { margin-bottom: 20px; }
+
+.gauges-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.gauge-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 18px 10px; width: 150px; }
 .gauge-card svg { width: 128px; height: 128px; }
 .gauge-value { font-family: var(--font-mono); font-size: 22px; font-weight: 600; }
 .gauge-scale-label { font-family: var(--font-display); font-size: 13.5px; font-weight: 600; margin-top: 8px; }
@@ -363,10 +377,10 @@ button { font-family: inherit; cursor: pointer; }
 .gauge-value-text { font-family: var(--font-mono); font-size: 20px; font-weight: 600; fill: var(--ink); }
 
 .subsection-title { font-size: 15px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-muted); margin: 0 0 20px; }
-.strengths-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; margin-bottom: 36px; }
+.strengths-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 36px; }
 .strength-card {
   background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-md);
-  padding: 20px; display: flex; flex-direction: column; gap: 10px;
+  padding: 20px; display: flex; flex-direction: column; gap: 10px; width: 210px;
   transition: border-color var(--dur-fast), box-shadow var(--dur-fast), transform var(--dur-fast);
 }
 .strength-card:hover { border-color: var(--accent-copper); box-shadow: 0 0 24px -8px var(--glow-copper); transform: translateY(-2px); }
@@ -431,6 +445,9 @@ button { font-family: inherit; cursor: pointer; }
   .stat-strip { grid-template-columns: repeat(2, 1fr); }
   .stat-block:nth-child(3) { border-left: none; }
   .competency-panels { grid-template-columns: 1fr; }
+  .leadership-split { grid-template-columns: 1fr; gap: 40px; }
+  .node-detail-body { flex-direction: column; }
+  .nd-photo { width: 88px; height: 88px; }
 }
 
 @media (max-width: 540px) {

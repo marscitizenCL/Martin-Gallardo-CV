@@ -95,7 +95,7 @@
     <div class="diagram-scroll">
       <svg id="line-diagram" role="img" aria-label="Diagrama unifilar de trayectoria profesional"></svg>
     </div>
-    <p class="scroll-hint">◂ desliza para recorrer la línea completa · toca un nodo para ver el detalle ▸</p>
+    <p class="scroll-hint">◂ desliza para recorrer la línea completa · haz clic en un nodo para ver el detalle ▸</p>
 
     <div id="node-detail" class="node-detail" hidden>
       <button class="node-detail-close" type="button" aria-label="Cerrar detalle">&times;</button>
@@ -129,10 +129,16 @@
       <p class="section-intro">Lecturas de dos evaluaciones psicométricas independientes: Hogan Leadership Forecast (potencial de liderazgo) y Strengthscope (fortalezas de energía). Ambas miden orientación a fortalezas, no riesgos — la lectura de derailers (HDS) se mantiene fuera de esta vista pública por diseño; ver nota al final de la sección.</p>
     </div>
 
-    <div class="gauges-grid" id="gauges-grid"></div>
-
-    <h3 class="subsection-title">Fortalezas significativas — Strengthscope</h3>
-    <div class="strengths-grid" id="strengths-grid"></div>
+    <div class="leadership-split">
+      <div class="leadership-col">
+        <h3 class="subsection-title">Hogan — Potencial de Liderazgo</h3>
+        <div class="gauges-grid" id="gauges-grid"></div>
+      </div>
+      <div class="leadership-col">
+        <h3 class="subsection-title">Fortalezas significativas — Strengthscope</h3>
+        <div class="strengths-grid" id="strengths-grid"></div>
+      </div>
+    </div>
 
     <p class="fine-note">
       <strong>Nota de criterio:</strong> el informe Hogan incluye un tercer instrumento (HDS) que mide tendencias de descarrilamiento bajo presión — información valiosa para coaching interno, pero no diseñada para consumo público de reclutamiento. Por eso no aparece aquí. Disponible bajo solicitud directa.

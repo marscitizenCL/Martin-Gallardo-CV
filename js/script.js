@@ -135,13 +135,19 @@ function openNodeDetail(id) {
   const body = panel.querySelector(".node-detail-body");
 
   const metricLine = n.metric ? `<p class="nd-metric">${escapeXML(n.metric)}</p>` : "";
+  const photoBlock = n.photo
+    ? `<img class="nd-photo" src="${n.photo}" alt="${escapeXML(n.company)}" width="120" height="120">`
+    : "";
 
   body.innerHTML = `
-    <h3>${escapeXML(n.company)}</h3>
-    <p class="nd-role">${escapeXML(n.role)}</p>
-    <p class="nd-period">${escapeXML(n.period)}${n.current ? " · ROL ACTUAL" : ""}</p>
-    ${metricLine}
-    <ul>${n.bullets.map((b) => `<li>${escapeXML(b)}</li>`).join("")}</ul>
+    ${photoBlock}
+    <div class="nd-text">
+      <h3>${escapeXML(n.company)}</h3>
+      <p class="nd-role">${escapeXML(n.role)}</p>
+      <p class="nd-period">${escapeXML(n.period)}${n.current ? " · ROL ACTUAL" : ""}</p>
+      ${metricLine}
+      <ul>${n.bullets.map((b) => `<li>${escapeXML(b)}</li>`).join("")}</ul>
+    </div>
   `;
   panel.hidden = false;
   panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -221,7 +227,8 @@ function buildGaugeSVG(value) {
 
 function renderLeadership() {
   const gaugesWrap = document.getElementById("gauges-grid");
-  gaugesWrap.innerHTML = HOGAN_POTENTIAL.map(
+  const sortedHogan = [...HOGAN_POTENTIAL].sort((a, b) => b.value - a.value);
+  gaugesWrap.innerHTML = sortedHogan.map(
     (h) => `
     <div class="gauge-card reveal">
       ${buildGaugeSVG(h.value)}
@@ -289,10 +296,6 @@ function renderContact() {
     <a class="contact-item" href="${c.linkedin}" target="_blank" rel="noopener">
       <span class="contact-label">LinkedIn</span>
       <span class="contact-value">Ver perfil</span>
-    </a>
-    <a class="contact-item" href="${c.github}" target="_blank" rel="noopener">
-      <span class="contact-label">GitHub</span>
-      <span class="contact-value">Ver código de este sitio</span>
     </a>
     <div class="contact-item">
       <span class="contact-label">Ubicación</span>

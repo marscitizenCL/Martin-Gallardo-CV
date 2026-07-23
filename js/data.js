@@ -13,8 +13,7 @@ const PROFILE = {
   contact: {
     email: "martin.ignacio.gallardo@gmail.com",
     phone: "+56 9 9698 0306",
-    linkedin: "https://www.linkedin.com/in/TU-USUARIO-LINKEDIN", // TODO: reemplazar con tu URL real
-    github: "https://github.com/TU-USUARIO-GITHUB", // TODO: reemplazar con tu usuario real
+    linkedin: "https://www.linkedin.com/in/martingallardo/",
   },
   stats: [
     { value: "15+", label: "años en liderazgo comercial B2B" },
@@ -26,7 +25,9 @@ const PROFILE = {
 
 const REGIONS = ["Chile", "Argentina", "Perú", "Sudamérica", "EE. UU. / Europa — reporte directo"];
 
-/* Orden cronológico ascendente — el nodo más reciente queda "energizado". */
+/* Orden cronológico ascendente — el nodo más reciente queda "energizado".
+   Campo opcional "photo": ruta a una imagen cuadrada (ej. "assets/roles/chint.jpg")
+   para mostrar junto a la descripción de ese cargo en el panel de detalle. */
 const CAREER = [
   {
     id: "root",
