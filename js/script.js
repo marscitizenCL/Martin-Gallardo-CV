@@ -140,7 +140,6 @@ function openNodeDetail(id) {
     : "";
 
   body.innerHTML = `
-    ${photoBlock}
     <div class="nd-text">
       <h3>${escapeXML(n.company)}</h3>
       <p class="nd-role">${escapeXML(n.role)}</p>
@@ -148,6 +147,7 @@ function openNodeDetail(id) {
       ${metricLine}
       <ul>${n.bullets.map((b) => `<li>${escapeXML(b)}</li>`).join("")}</ul>
     </div>
+    ${photoBlock}
   `;
   panel.hidden = false;
   panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
